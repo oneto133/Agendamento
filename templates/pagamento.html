@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pagamento - Reserva #{{ reserva.id }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='css/agendamento.css') }}">
+</head>
+<body>
+  <main class="card payment-card">
+    <h1>Finalize seu pagamento</h1>
+    <p class="intro">
+      Reserva #{{ reserva.id }} criada para {{ reserva.data_reserva }} as {{ reserva.horario }}.
+      Valor da cobranca: <strong>R$ {{ valor_cobranca }}</strong>.
+    </p>
+
+    <div class="pix-block">
+      <h2>Pix copia e cola</h2>
+      {% if pix_payload %}
+        <div id="pixPayload" class="pix-code-card">{{ pix_payload }}</div>
+        <button id="copyPix" type="button">Copiar codigo Pix</button>
+      {% else %}
+        <p class="note">Nao foi possivel carregar o codigo Pix no momento. Tente recarregar a pagina.</p>
+      {% endif %}
+    </div>
+
+    <div class="pix-block">
+      <h2>Dados do pagador</h2>
+      <div class="payer-grid">
+        <div><strong>Nome:</strong> {{ reserva.nome }}</div>
+        <div><strong>CPF:</strong> {{ reserva.cpf }}</div>
+        <div><strong>Telefone:</strong> {{ reserva.telefone }}</div>
+      </div>
+    </div>
+
+    <div class="pix-block">
+      <h2>QR Code Pix</h2>
+      {% if pix_qr_image %}
+        <img class="pix-image" src="{{ pix_qr_image }}" alt="QR Code Pix">
+      {% else %}
+        <p class="note">QR Code indisponivel no momento.</p>
+      {% endif %}
+    </div>
+
+    {% if reserva.asaas_invoice_url %}
+      <p class="note">
+        Opcional: <a href="{{ reserva.asaas_invoice_url }}" target="_blank" rel="noopener noreferrer">abrir cobranca no Asaas</a>
+      </p>
+    {% endif %}
+
+    <p id="statusLabel" class="status-label">Status do pagamento: {{ status_pagamento }}</p>
+  </main>
+
+  <script>
+    (function () {
+      const reservaId = {{ reserva.id }};
+      const statusLabel = document.getElementById("statusLabel");
+      const copyButton = document.getElementById("copyPix");
+      const payloadField = document.getElementById("pixPayload");
+
+      async function verificarStatus() {
+        try {
+          const response = await fetch(`/pagamento-status/${reservaId}`);
+          if (!response.ok) {
+            return;
+          }
+
+          const data = await response.json();
+          if (!data.ok) {
+            return;
+          }
+
+          if (statusLabel && data.status) {
+            statusLabel.textContent = `Status do pagamento: ${data.status}`;
+          }
+
+          if (data.pago && data.redirect_url) {
+            window.location.href = data.redirect_url;
+          }
+        } catch (_) {
+        }
+      }
+
+      if (copyButton && payloadField) {
+        copyButton.addEventListener("click", async function () {
+          try {
+            await navigator.clipboard.writeText(payloadField.textContent);
+            copyButton.textContent = "Codigo copiado";
+            setTimeout(() => {
+              copyButton.textContent = "Copiar codigo Pix";
+            }, 1800);
+          } catch (_) {
+            copyButton.textContent = "Falha ao copiar";
+            setTimeout(() => {
+              copyButton.textContent = "Copiar codigo Pix";
+            }, 1800);
+          }
+        });
+      }
+
+      verificarStatus();
+      setInterval(verificarStatus, 5000);
+    })();
+  </script>
+</body>
+</html>

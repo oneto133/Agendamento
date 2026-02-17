@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agendamento Concluido</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='css/agendamento.css') }}">
+</head>
+<body>
+  <main class="card done-card">
+    <h1>Agendamento concluido</h1>
+    <p class="intro">Pagamento aprovado e reserva confirmada.</p>
+
+    <div class="done-grid">
+      <div><strong>Reserva:</strong> #{{ reserva.id }}</div>
+      <div><strong>Cliente:</strong> {{ reserva.nome }}</div>
+      <div><strong>Servico:</strong> {{ reserva.servico or 'Servico padrao' }}</div>
+      <div><strong>Data:</strong> {{ reserva.data_reserva }}</div>
+      <div><strong>Hora:</strong> {{ reserva.horario }}</div>
+      <div><strong>Local:</strong> {{ reserva.local_atendimento or 'Endereco ainda nao definido' }}</div>
+      <div><strong>Valor pago:</strong> R$ {{ valor_cobranca }}</div>
+      <div><strong>Status:</strong> {{ reserva.status_pagamento }}</div>
+    </div>
+
+    <a class="button-link" href="/">Novo agendamento</a>
+  </main>
+</body>
+</html>

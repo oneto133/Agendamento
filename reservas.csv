@@ -1,0 +1,4 @@
+nome,telefone,servico,data,horario,forma_pagamento,valor_total,valor_pago_no_ato,valor_restante,criado_em
+Armando neto,91988468119,Cilios Tufos,2026-02-15,08:00,Pagamento no horario,50.00,0.00,50.00,2026-02-15T13:37:47
+Armando neto,91988468119,Cilios Tufos,2026-02-15,08:00,Pagamento no horario,50.00,0.00,50.00,2026-02-15T13:43:43
+Armando neto,91988468119,Cilios Tufos,2026-02-15,08:00,Pagamento adiantado,40.00,20.00,20.00,2026-02-15T14:13:44

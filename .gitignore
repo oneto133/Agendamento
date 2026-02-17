@@ -1,0 +1,8 @@
+﻿__pycache__/
+*.pyc
+.venv/
+venv/
+reservas.db
+chave.txt
+cloudflared.log
+.env

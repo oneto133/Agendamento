@@ -1,0 +1,119 @@
+﻿<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agendamento - Genio</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='css/agendamento.css') }}">
+</head>
+<body>
+  <section id="welcomeOverlay" class="welcome-overlay" aria-live="polite">
+    <div class="welcome-card">
+      <p class="welcome-top">Boas-vindas!</p>
+      <h2></h2>
+      <p class="welcome-name"><span id="welcomeName"></span><span class="typing-caret">|</span></p>
+    </div>
+  </section>
+
+  <main class="card">
+    <h1>Agendamentos</h1>
+    <p class="intro">
+      Escolha uma data e horario disponivel para os proximos 7 dias.
+      Todos os horarios listados estao livres no momento.
+    </p>
+
+    {% if erro %}
+      <div class="alert error">{{ erro }}</div>
+    {% endif %}
+
+    {% if sucesso %}
+      <div class="alert success">{{ sucesso }}</div>
+    {% endif %}
+
+    <form method="post">
+      <div>
+        <label for="servico">Servico</label>
+        <select id="servico" name="servico" required>
+          {% for item in servicos %}
+            <option value="{{ item }}" {% if dados.servico == item %}selected{% endif %}>{{ item }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div>
+        <label for="nome">Nome completo</label>
+        <input id="nome" name="nome" required value="{{ dados.nome }}">
+      </div>
+
+      <div>
+        <label for="telefone">Telefone</label>
+        <input id="telefone" name="telefone" required value="{{ dados.telefone }}">
+      </div>
+
+      <div>
+        <label for="cpf">CPF</label>
+        <input id="cpf" name="cpf" required maxlength="14" placeholder="000.000.000-00" value="{{ dados.cpf }}">
+      </div>
+
+      <div>
+        <label for="data">Data</label>
+        <input id="data" type="date" name="data" required min="{{ data_min }}" max="{{ data_max }}" value="{{ dados.data }}">
+      </div>
+
+      <div>
+        <label for="horario">Horario</label>
+        <select id="horario" name="horario" required>
+          {% for hora in horarios %}
+            <option value="{{ hora }}" {% if dados.horario == hora %}selected{% endif %}>{{ hora }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="full">
+        <label>Forma de pagamento</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="forma_pagamento" value="adiantado" {% if dados.forma_pagamento == "adiantado" %}checked{% endif %}>
+            Pagar agora: total da reserva fica R$ {{ "%.2f"|format(valor_desconto) }}
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="forma_pagamento" value="no_horario" {% if dados.forma_pagamento == "no_horario" %}checked{% endif %}>
+            Pagar no horario: total da reserva fica R$ {{ "%.2f"|format(valor_padrao) }}
+          </label>
+        </div>
+      </div>
+
+      <button class="full" type="submit">Confirmar reserva</button>
+    </form>
+
+    <p class="note">
+      Regras: somente agendamentos entre {{ data_min }} e {{ data_max }}.
+      Registros agora sao salvos em <code>reservas.db</code> (SQLite). Apos confirmar, voce sera levado para a pagina de pagamento Pix.
+    </p>
+  </main>
+
+  <script>
+    (function () {
+      const overlay = document.getElementById("welcomeOverlay");
+      const nameTarget = document.getElementById("welcomeName");
+      const texto = "Adriane monteiro Beauty";
+      let i = 0;
+
+      function digitar() {
+        if (i < texto.length) {
+          nameTarget.textContent += texto.charAt(i);
+          i += 1;
+          setTimeout(digitar, 85);
+          return;
+        }
+
+        setTimeout(() => {
+          overlay.classList.add("is-hidden");
+        }, 900);
+      }
+
+      digitar();
+    })();
+  </script>
+</body>
+</html>

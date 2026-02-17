@@ -1,0 +1,345 @@
+﻿:root {
+  --bg-gradient: linear-gradient(140deg, #351255 0%, #5f2c9f 45%, #8c4de1 100%);
+  --panel: rgba(18, 10, 36, 0.78);
+  --panel-border: rgba(255, 255, 255, 0.18);
+  --text: #f7f3ff;
+  --muted: #d8c9f7;
+  --accent: #c69bff;
+  --success: #93f5ce;
+  --danger: #ffb4d6;
+  --input: rgba(255, 255, 255, 0.12);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  color: var(--text);
+  background: var(--bg-gradient);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.card {
+  width: min(760px, 100%);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 20px 60px rgba(10, 3, 24, 0.45);
+  padding: 24px;
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+}
+
+.intro {
+  margin: 0 0 20px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.price-box {
+  display: grid;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 18px;
+}
+
+.price-box strong { color: var(--accent); }
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.full { grid-column: 1 / -1; }
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+input, select {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--input);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 10px 12px;
+  outline: none;
+}
+
+select {
+  background: #1a1030;
+  color: var(--text);
+}
+
+select option {
+  background: #1a1030;
+  color: var(--text);
+}
+
+input:focus, select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(198, 155, 255, 0.28);
+}
+
+.radio-group {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.radio-option input { width: auto; }
+
+button {
+  border: 0;
+  background: linear-gradient(120deg, #bf8fff, #8b54de);
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.alert {
+  margin-bottom: 12px;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+}
+
+.error {
+  background: rgba(255, 180, 214, 0.16);
+  border: 1px solid rgba(255, 180, 214, 0.42);
+  color: var(--danger);
+}
+
+.success {
+  background: rgba(147, 245, 206, 0.14);
+  border: 1px solid rgba(147, 245, 206, 0.38);
+  color: var(--success);
+}
+
+.note {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.payment-card {
+  width: min(680px, 100%);
+}
+
+.pix-block {
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.pix-block h2 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+
+.pix-text {
+  width: 100%;
+  min-height: 92px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text);
+  padding: 10px;
+  resize: vertical;
+}
+
+.pix-code-card {
+  width: 100%;
+  min-height: 170px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text);
+  padding: 14px;
+  word-break: break-all;
+  line-height: 1.5;
+  font-size: 0.98rem;
+}
+
+.pix-image {
+  max-width: 260px;
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: #fff;
+  padding: 8px;
+}
+
+.status-label {
+  margin-top: 14px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.payer-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.done-card {
+  width: min(700px, 100%);
+}
+
+.done-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.button-link {
+  margin-top: 16px;
+  display: inline-block;
+  border-radius: 12px;
+  padding: 12px 16px;
+  text-decoration: none;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(120deg, #bf8fff, #8b54de);
+}
+
+.welcome-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(135, 90, 220, 0.32), rgba(8, 4, 18, 0.92));
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 1200;
+  transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+
+.welcome-overlay.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.welcome-card {
+  width: min(480px, 100%);
+  text-align: center;
+  background: rgba(17, 12, 31, 0.97);
+  border: 1px solid rgba(198, 155, 255, 0.42);
+  border-radius: 20px;
+  padding: 28px 22px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.46);
+}
+
+.welcome-top {
+  margin: 0 0 8px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.welcome-card h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.welcome-name {
+  margin: 8px 0 0;
+  color: var(--accent);
+  font-size: clamp(1.4rem, 4.5vw, 2rem);
+  font-weight: 700;
+}
+
+.typing-caret {
+  animation: blink 0.85s steps(1, end) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 4, 18, 0.68);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 999;
+}
+
+.confirm-card {
+  width: min(420px, 100%);
+  border-radius: 18px;
+  border: 1px solid rgba(147, 245, 206, 0.42);
+  background: rgba(17, 12, 31, 0.96);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.confirm-icon {
+  font-size: 2.4rem;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.confirm-card h2 {
+  margin: 0 0 8px;
+  color: var(--success);
+  font-size: 1.35rem;
+}
+
+.confirm-card p {
+  margin: 0;
+  color: var(--text);
+}
+
+@media (max-width: 680px) {
+  form { grid-template-columns: 1fr; }
+  .done-grid { grid-template-columns: 1fr; }
+}
