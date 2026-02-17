@@ -18,8 +18,8 @@
   <main class="card">
     <h1>Agendamentos</h1>
     <p class="intro">
-      Escolha uma data e horario disponivel para os proximos 7 dias.
-      Todos os horarios listados estao livres no momento.
+      Escolha uma data e horário disponivel para os próximos 7 dias.
+      Todos os horários listados estão livres no momento.
     </p>
 
     {% if erro %}
@@ -61,7 +61,7 @@
       </div>
 
       <div>
-        <label for="horario">Horario</label>
+        <label for="horario">Horário</label>
         <select id="horario" name="horario" required>
           {% for hora in horarios %}
             <option value="{{ hora }}" {% if dados.horario == hora %}selected{% endif %}>{{ hora }}</option>
@@ -78,7 +78,7 @@
           </label>
           <label class="radio-option">
             <input type="radio" name="forma_pagamento" value="no_horario" {% if dados.forma_pagamento == "no_horario" %}checked{% endif %}>
-            Pagar no horario: total da reserva fica R$ {{ "%.2f"|format(valor_padrao) }}
+            Pagar no horário: total da reserva fica R$ {{ "%.2f"|format(valor_padrao) }}
           </label>
         </div>
       </div>
@@ -88,7 +88,7 @@
 
     <p class="note">
       Regras: somente agendamentos entre {{ data_min }} e {{ data_max }}.
-      Registros agora sao salvos em <code>reservas.db</code> (SQLite). Apos confirmar, voce sera levado para a pagina de pagamento Pix.
+      Após confirmação, voce será levado para a página de pagamento Pix.
     </p>
   </main>
 

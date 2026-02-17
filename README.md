@@ -2,6 +2,14 @@
 
 Aplicação web para agendamento de serviços com cobrança via Pix integrada ao Asaas.
 
+O valor escolhido para pagamento é de 50 reais padrão, podendo ser alterado a qualquer momento, dependendo dos serviços oferecidos ao seu cliente.
+
+Os procedimentos também podem ser alterados, de acordo com o seu negócio, minha recomendação é que seja criado uma tabela no banco de dados com o `id` do procedimento `nome`, `descrição`, `valor`, `status`(boolean para ativo inativo) e `responsável`(profissional responsável pelo procedimento ou serviço, recomendado foreign key).
+
+Como ainda se encontra em fase de desenvolvimento, vou adicionar seção para status do agendamento, confirmação por e-mail e alteração/cancelamento seguindo regras internas, como regras de cancelamento em até 7 dias após a compra ou até 48h antes do serviço escolhido, com ou sem taxa, dependendo da sua regra de negócio.
+
+O banco de dados usado para o projeto é o SQLite, por se tratar de um banco de dados leve para testes e de fácil configuração.
+
 ## Objetivo
 
 Este projeto foi desenvolvido para:
@@ -158,3 +166,6 @@ A tabela `reservas` armazena:
 - separar configurações por ambiente (dev/homolog/prod);
 - adicionar testes automatizados para regras de negócio;
 - incluir endpoint de webhook do Asaas para confirmação server-to-server (evita polling).
+
+## Considerações finais
+

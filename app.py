@@ -3,7 +3,6 @@ from pathlib import Path
 import os
 import re
 import sqlite3
-
 import httpx
 from fastapi import FastAPI, Form, Request
 from fastapi.responses import JSONResponse, RedirectResponse
@@ -15,8 +14,9 @@ BASE_DIR = Path(__file__).parent
 DB_PATH = BASE_DIR / "reservas.db"
 
 SERVICOS = {
-    "": {"valor_reservado": 100.0, "valor_com_desconto": 80.0},
+    "Brow lamination": {"valor_reservado": 100.0, "valor_com_desconto": 80.0},
     "Fio a Fio": {"valor_reservado": 50.0, "valor_com_desconto": 40.0},
+    "Lash lifting": {"valor_reservado": 50.0, "valor_com_desconto": 40.0}
 }
 HORARIOS = [
     "08:00",
